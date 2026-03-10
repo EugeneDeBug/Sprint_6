@@ -7,3 +7,4 @@ class BasePageLocators:
     ORDER_BUTTON_MIDDLE = (By.XPATH, "//button[text()='Заказать' and contains(@class, 'Button_')]")
     COOKIE_BANNER = (By.CLASS_NAME, "App_CookieConsent__1yUIN")
     COOKIE_ACCEPT_BUTTON = (By.XPATH, "//button[text()='да все привыкли']")
+    

@@ -10,10 +10,11 @@ class MainPage(BasePage):
         self.scroll_to_element(BasePageLocators.ORDER_BUTTON_MIDDLE)
         self.click_element(BasePageLocators.ORDER_BUTTON_MIDDLE)
 
-    def click_faq_question(self, index):        
+    def click_faq_question(self, index):
         questions = self.driver.find_elements(*MainPageLocators.FAQ_QUESTION)
         questions[index].click()
 
-    def get_faq_answer_text(self, index):       
+    def get_faq_answer_text(self, index):
         answers = self.driver.find_elements(*MainPageLocators.FAQ_ANSWER)
         return answers[index].text
+    

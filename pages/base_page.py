@@ -34,7 +34,6 @@ class BasePage:
         self.click_element(BasePageLocators.LOGO_YANDEX)
 
     def close_cookie_banner(self):
-               
         try:
             banner = self.driver.find_element(*BasePageLocators.COOKIE_BANNER)
             if banner.is_displayed():
@@ -46,10 +45,16 @@ class BasePage:
                 except:
                     self.driver.execute_script("arguments[0].remove();", banner)
         except:
-            pass  
+            pass
+
+    # Методы для работы с окнами
+    def get_current_window_handle(self):
+        return self.driver.current_window_handle
+
+    def close_current_window(self):
+        self.driver.close()
 
     def wait_for_new_window(self, original_window, timeout=5):
-        
         def condition(driver):
             return len(driver.window_handles) > 1
         WebDriverWait(self.driver, timeout).until(condition)
@@ -58,14 +63,15 @@ class BasePage:
                 return window
         raise Exception("Новое окно не найдено")
 
-    def switch_to_window(self, window_handle):        
+    def switch_to_window(self, window_handle):
         self.driver.switch_to.window(window_handle)
 
-    def wait_for_url_not_blank(self, timeout=10):        
+    def wait_for_url_not_blank(self, timeout=10):
         def condition(driver):
             url = driver.current_url
             return url not in ["about:blank", ""]
         WebDriverWait(self.driver, timeout).until(condition)
 
-    def get_current_url(self):        
+    def get_current_url(self):
         return self.driver.current_url
+    
