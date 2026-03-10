@@ -1,5 +1,6 @@
 __pycache__/
 __pycache__
+allure_results/
 *.pyc
 .idea/
 .vscode/
