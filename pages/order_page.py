@@ -31,7 +31,7 @@ class OrderPage(BasePage):
         self.send_keys(OrderPageLocators.DATE_INPUT, date)
         self.send_keys(OrderPageLocators.DATE_INPUT, Keys.ENTER)
         self.choose_rental_period(rental_period)
-        self.click_element(color_locator)  # клик по переданному локатору цвета
+        self.click_element(color_locator)  
         self.send_keys(OrderPageLocators.COMMENT_INPUT, comment)
         self.click_element(OrderPageLocators.ORDER_BUTTON_FINAL)
 

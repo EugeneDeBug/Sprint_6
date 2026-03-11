@@ -6,6 +6,12 @@ class BasePage:
     def __init__(self, driver):
         self.driver = driver
 
+    def find_element(self, locator):       
+        return self.driver.find_element(*locator)
+
+    def find_elements(self, locator):        
+        return self.driver.find_elements(*locator)
+
     def wait_for_element_visible(self, locator, timeout=5):
         return WebDriverWait(self.driver, timeout).until(
             EC.visibility_of_element_located(locator)
@@ -18,13 +24,14 @@ class BasePage:
         element.click()
 
     def send_keys(self, locator, text):
-        self.driver.find_element(*locator).send_keys(text)
+        element = self.find_element(locator)
+        element.send_keys(text)
 
     def get_text(self, locator):
-        return self.driver.find_element(*locator).text
+        return self.find_element(locator).text
 
     def scroll_to_element(self, locator):
-        element = self.driver.find_element(*locator)
+        element = self.find_element(locator)
         self.driver.execute_script("arguments[0].scrollIntoView();", element)
 
     def click_logo_scooter(self):
@@ -35,7 +42,7 @@ class BasePage:
 
     def close_cookie_banner(self):
         try:
-            banner = self.driver.find_element(*BasePageLocators.COOKIE_BANNER)
+            banner = self.find_element(BasePageLocators.COOKIE_BANNER)
             if banner.is_displayed():
                 try:
                     accept_button = WebDriverWait(self.driver, 2).until(
@@ -46,8 +53,7 @@ class BasePage:
                     self.driver.execute_script("arguments[0].remove();", banner)
         except:
             pass
-
-    # Методы для работы с окнами
+    
     def get_current_window_handle(self):
         return self.driver.current_window_handle
 
